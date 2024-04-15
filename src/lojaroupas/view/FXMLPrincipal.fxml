@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane id="AnchorPane" prefHeight="390.0" prefWidth="590.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lojaroupas.controller.FXMLPrincipalController">
+   <children>
+      <VBox prefHeight="440.0" prefWidth="674.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <MenuBar prefWidth="600.0">
+              <menus>
+                <Menu mnemonicParsing="false" text="Cadastros">
+                  <items>
+                    <MenuItem fx:id="menuItemCadastrosClientes" mnemonicParsing="false" onAction="#handleMenuItemCadastrosClientes" text="Clientes" />
+                        <MenuItem fx:id="menuItemCadastrosFornecedores" mnemonicParsing="false" onAction="#handleMenuItemCadastrosFornecedores" text="Fornecedores" />
+                        <MenuItem fx:id="menuItemCadastrosFuncionarios" mnemonicParsing="false" onAction="#handleMenuItemCadastrosFuncionarios" text="Funcionários" />
+                        <MenuItem fx:id="menuItemCadastrosProdutos" mnemonicParsing="false" onAction="#handleMenuItemCadastrosProdutos" text="Produtos" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Processos">
+                  <items>
+                    <MenuItem fx:id="menuItemProcessosRecebimento" mnemonicParsing="false" onAction="#handleMenuItemProcessosRecebimento" text="Recebimento de entrega" />
+                        <MenuItem fx:id="menuItemProcessosVenda" mnemonicParsing="false" onAction="#handleMenuItemProcessosVenda" text="Registro de venda" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Relatórios">
+                  <items>
+                    <MenuItem fx:id="menuItemRelatoriosProdutosTecido" mnemonicParsing="false" onAction="#handleMenuItemRelatoriosProdutosTecido" text="Produtos por tecido" />
+                        <MenuItem fx:id="menuItemRelatoriosVendasFuncionario" mnemonicParsing="false" onAction="#handleMenuItemRelatoriosVendasFuncionario" text="Vendas por funcionário" />
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
+            <AnchorPane fx:id="anchorPane" prefHeight="553.0" prefWidth="709.0" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
