@@ -57,7 +57,7 @@
                         <TextField fx:id="textFieldClienteCpf" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <TextField fx:id="textFieldClienteTelefone" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         <ComboBox fx:id="comboBoxClienteUf" prefHeight="25.0" prefWidth="290.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <ComboBox fx:id="comboBoxClienteCidade" prefHeight="25.0" prefWidth="239.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <ComboBox fx:id="comboBoxClienteCidade" onMouseClicked="#carregarComboBoxCidade" prefHeight="25.0" prefWidth="239.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                      </children>
                   </GridPane>
                   <Group layoutX="6.0" layoutY="-25.0" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0">
