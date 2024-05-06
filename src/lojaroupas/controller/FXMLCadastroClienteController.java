@@ -8,13 +8,19 @@ package lojaroupas.controller;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
@@ -139,7 +145,7 @@ public class FXMLCadastroClienteController implements Initializable {
             textFieldClienteCpf.setText(cliente.getCpf());
             textFieldClienteTelefone.setText(cliente.getTelefone());
         //    comboBoxClienteUf.setText(cliente.getCidade());
-        //    comboBoxClienteCidade.setValue(cliente.getCidade());
+            comboBoxClienteCidade.setValue(pegarNomeCidade(cliente.getCidade()));
         } else {
             textFieldClienteNome.setText("");
             textFieldClienteCpf.setText("");
@@ -148,16 +154,120 @@ public class FXMLCadastroClienteController implements Initializable {
         //    comboBoxClienteCidade.setText("");
         }
     }
-    
+
     @FXML
     public void handleButtonInserir() throws IOException, SQLException {
+        Cliente cliente = new Cliente();
+        if (validarEntradaDeDados()) {
+            cliente.setNome(textFieldClienteNome.getText());
+            cliente.setCpf(textFieldClienteCpf.getText());
+            cliente.setTelefone(textFieldClienteTelefone.getText());
+            cliente.setCidade(pegarIdCidade(comboBoxClienteCidade.getValue()));
+            
+            clienteDAO.inserir(cliente);
+            carregarTableViewClientes();
+        }
     }
 
     @FXML
     public void handleButtonAlterar() throws IOException, SQLException {
+        Cliente cliente = tableViewClientes.getSelectionModel().getSelectedItem();//Obtendo cliente selecionado
+        Cliente resultado = new Cliente();
+        if (cliente != null) {
+            if (validarEntradaDeDados()) {
+                cliente.setCpf(tableColumnClienteCpf.getText());
+
+                resultado = clienteDAO.buscar(cliente);
+                
+                resultado.setNome(textFieldClienteNome.getText());
+                resultado.setCpf(textFieldClienteCpf.getText());
+                resultado.setTelefone(textFieldClienteTelefone.getText());
+                resultado.setCidade(pegarIdCidade(comboBoxClienteCidade.getValue()));
+                
+                clienteDAO.alterar(resultado);
+                
+                carregarTableViewClientes();
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Por favor, escolha um Cliente na Tabela!");
+            alert.show();
+        }
     }
 
     @FXML
     public void handleButtonRemover() throws IOException {
+        Cliente cliente = tableViewClientes.getSelectionModel().getSelectedItem();
+        if (cliente != null) {
+            clienteDAO.remover(cliente);
+            carregarTableViewClientes();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Por favor, escolha um Cliente na Tabela!");
+            alert.show();
+        }
+    }
+    
+    private boolean validarEntradaDeDados() {
+        String errorMessage = "";
+
+        if (textFieldClienteNome.getText() == null || textFieldClienteNome.getText().length() == 0) {
+            errorMessage += "Nome inválido!\n";
+        }
+        if (textFieldClienteCpf.getText() == null || textFieldClienteCpf.getText().length() != 14) {
+            errorMessage += "CPF inválido!\n";
+        }
+        if (textFieldClienteTelefone.getText() == null || textFieldClienteTelefone.getText().length() == 0) {
+            errorMessage += "Telefone inválido!\n";
+        }
+        if (comboBoxClienteUf.getValue() == null) {
+            errorMessage += "UF inválida!\n";
+        }
+        if (comboBoxClienteCidade.getValue() == null) {
+            errorMessage += "Cidade inválida!\n";
+        }
+        if (errorMessage.length() == 0) {
+            return true;
+        } else {
+            // Mostrando a mensagem de erro
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro no cadastro");
+            alert.setHeaderText("Campos inválidos, por favor, corrija...");
+            alert.setContentText(errorMessage);
+            alert.show();
+            return false;
+        }
+    }
+    
+    private int pegarIdCidade(String nome) {
+        int id = 0;
+        String sql = "SELECT idCidade FROM cidade WHERE nomeCidade = '" + nome + "'";
+        try {
+            PreparedStatement stmt_uf = connection.prepareStatement(sql);
+            ResultSet resultado = stmt_uf.executeQuery();
+            while(resultado.next()) {
+                id = resultado.getInt("idCidade");
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(CidadeDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return id;
+    }
+    
+    private String pegarNomeCidade(int id) {
+        String nome = "";
+        String sql = "SELECT nomeCidade FROM cidade WHERE idCidade = " + id;
+        try {
+            PreparedStatement stmt_uf = connection.prepareStatement(sql);
+            ResultSet resultado = stmt_uf.executeQuery();
+            while(resultado.next()) {
+                nome = resultado.getString("nomeCidade");
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(CidadeDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return nome;
     }
 }

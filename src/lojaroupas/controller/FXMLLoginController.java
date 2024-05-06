@@ -32,21 +32,19 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
+import javafx.scene.control.PasswordField;
 
 
 public class FXMLLoginController implements Initializable {
 
-   @FXML
-    private JFXTextField textFieldUsuario;
+    @FXML
+    private Button BtnLogin;
 
     @FXML
-    private JFXPasswordField textFieldSenha;
+    private TextField TextFieldLogin;
 
     @FXML
-    private JFXButton buttonLogin;
-
-    @FXML
-    private JFXButton buttonCadastrarUsuario;
+    private PasswordField TextFieldSenha;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
