@@ -86,7 +86,7 @@ public class FXMLCadastroClienteController implements Initializable {
         clienteDAO.setConnection(connection);
         
         carregarTableViewClientes();
-        carregarComboBoxUf();
+        //carregarComboBoxUf();
         //carregarComboBoxCidade();
 
         // Limpando a exibição dos detalhes do cliente
@@ -115,7 +115,8 @@ public class FXMLCadastroClienteController implements Initializable {
         ufDAO.setConnection(connection);
         listUf = ufDAO.listar();
         observableListUf = FXCollections.observableArrayList(listUf);
-        //System.out.print(observableListUf);
+        //comboBoxClienteUf.getItems().add(null);
+        comboBoxClienteUf.getItems().clear();
         comboBoxClienteUf.getItems().addAll(observableListUf);
     }
     
@@ -144,13 +145,13 @@ public class FXMLCadastroClienteController implements Initializable {
             textFieldClienteNome.setText(cliente.getNome());
             textFieldClienteCpf.setText(cliente.getCpf());
             textFieldClienteTelefone.setText(cliente.getTelefone());
-        //    comboBoxClienteUf.setText(cliente.getCidade());
+            comboBoxClienteUf.setValue(pegarNomeUf(cliente.getCidade()));
             comboBoxClienteCidade.setValue(pegarNomeCidade(cliente.getCidade()));
         } else {
             textFieldClienteNome.setText("");
             textFieldClienteCpf.setText("");
             textFieldClienteTelefone.setText("");
-        //    comboBoxClienteUf.setValue();
+        //    comboBoxClienteUf.setValue(null);
         //    comboBoxClienteCidade.setText("");
         }
     }
@@ -220,10 +221,10 @@ public class FXMLCadastroClienteController implements Initializable {
         if (textFieldClienteTelefone.getText() == null || textFieldClienteTelefone.getText().length() == 0) {
             errorMessage += "Telefone inválido!\n";
         }
-        if (comboBoxClienteUf.getValue() == null) {
+        if ("".equals(comboBoxClienteUf.getValue())) {
             errorMessage += "UF inválida!\n";
         }
-        if (comboBoxClienteCidade.getValue() == null) {
+        if ("".equals(comboBoxClienteCidade.getValue())) {
             errorMessage += "Cidade inválida!\n";
         }
         if (errorMessage.length() == 0) {
@@ -263,6 +264,34 @@ public class FXMLCadastroClienteController implements Initializable {
             ResultSet resultado = stmt_uf.executeQuery();
             while(resultado.next()) {
                 nome = resultado.getString("nomeCidade");
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(CidadeDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return nome;
+    }
+    
+    private String pegarNomeUf(int id_cidade) {
+        String nome = "";
+        int id_uf = 0;
+        String sql = "SELECT ufCidade FROM cidade WHERE idCidade = " + id_cidade;
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            ResultSet resultado = stmt.executeQuery();
+            while(resultado.next()) {
+                id_uf = resultado.getInt("ufCidade");
+            }
+            
+            String sql_uf = "SELECT nomeUf FROM uf WHERE idUf = " + id_uf;
+            try {
+                PreparedStatement stmt_uf = connection.prepareStatement(sql_uf);
+                ResultSet resultado_uf = stmt_uf.executeQuery();
+                while(resultado_uf.next()) {
+                    nome = resultado_uf.getString("nomeUf");
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(CidadeDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
             
         } catch (SQLException ex) {

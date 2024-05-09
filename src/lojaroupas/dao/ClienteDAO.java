@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.scene.control.Alert;
 import lojaroupas.model.Cliente;
 
 /**
@@ -63,13 +64,18 @@ public class ClienteDAO {
             stmt.execute();
             return true;
         } catch (SQLException ex) {
-            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+            //Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro no cadastro");
+            alert.setHeaderText("Cliente já cadastrado!");
+            alert.setContentText("O CPF inserido já está cadastrado, por favor confirme os dados de entrada.");
+            alert.show();
             return false;
         }
     }
     
     public void alterar(Cliente cliente) {
-        String sql = "UPDATE cliente SET nomeCliente = ?, telefoneCliente = ?, cidadeCliente = ? WHERE cpf_cliente = ?";
+        String sql = "UPDATE cliente SET nomeCliente = ?, telefoneCliente = ?, cidadeCliente = ? WHERE cpfCliente = ?";
 
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
@@ -78,6 +84,7 @@ public class ClienteDAO {
             stmt.setString(2, cliente.getTelefone());
             stmt.setInt(3, cliente.getCidade());
             stmt.setString(4, cliente.getCpf());
+            stmt.execute();
 
 
         } catch (SQLException e) {
