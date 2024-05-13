@@ -58,9 +58,9 @@
                         <Label text="Gerente?" GridPane.rowIndex="5" />
                         <TextField fx:id="textFieldFuncionarioNome" GridPane.columnIndex="1" />
                         <TextField fx:id="textFieldFuncionarioCpf" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <TextField fx:id="textFieldFuncionarioTelefone" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <ComboBox fx:id="comboBoxFuncionarioUf" prefHeight="25.0" prefWidth="290.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <ComboBox fx:id="comboBoxFuncionarioCidade" prefHeight="25.0" prefWidth="239.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <TextField fx:id="textFieldFuncionarioSalario" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <ComboBox fx:id="comboBoxFuncionarioUf" onMouseClicked="#carregarComboBoxUf" prefHeight="25.0" prefWidth="290.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <ComboBox fx:id="comboBoxFuncionarioCidade" onMouseClicked="#carregarComboBoxCidade" prefHeight="25.0" prefWidth="239.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                         <CheckBox fx:id="checkBoxFuncionarioGerente" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                      </children>
                   </GridPane>

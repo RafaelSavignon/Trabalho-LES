@@ -11,6 +11,7 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
 
@@ -99,5 +100,13 @@ public class FXMLPrincipalController implements Initializable {
     public void handleMenuItemRelatoriosVendasFuncionario() throws IOException {
         AnchorPane a = (AnchorPane) FXMLLoader.load(getClass().getResource("/lojaroupas/view/FXMLRelatorioVendaFuncionario.fxml"));
         anchorPane.getChildren().setAll(a);
+    }
+
+    public void acessoNegado(){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Acesso negado!");
+        alert.setHeaderText("Você não tem permissão para acessar esse recurso...");
+        alert.setContentText("Acesso exclusivo para gerentes");
+        alert.show();
     }
 }

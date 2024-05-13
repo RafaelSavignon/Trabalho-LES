@@ -5,16 +5,17 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label layoutX="102.0" layoutY="107.0" text="Produto:" />
-      <ComboBox layoutX="291.0" layoutY="103.0" prefWidth="150.0" />
-      <Label layoutX="102.0" layoutY="139.0" text="Fornecedor:" />
-      <ComboBox layoutX="291.0" layoutY="135.0" prefWidth="150.0" />
-      <Label layoutX="102.0" layoutY="171.0" text="Nota:" />
-      <ComboBox layoutX="291.0" layoutY="167.0" prefWidth="150.0" />
-      <Button layoutX="122.0" layoutY="341.0" mnemonicParsing="false" text="Registrar" />
-      <Button layoutX="388.0" layoutY="341.0" mnemonicParsing="false" text="Cancelar" />
+      <Label layoutX="112.0" layoutY="117.0" text="Produto:" />
+      <ComboBox layoutX="301.0" layoutY="113.0" prefWidth="150.0" />
+      <Label layoutX="112.0" layoutY="149.0" text="Funcionário:" />
+      <ComboBox layoutX="301.0" layoutY="145.0" prefWidth="150.0" />
+      <Label layoutX="112.0" layoutY="181.0" text="Cliente:" />
+      <ComboBox layoutX="301.0" layoutY="177.0" prefWidth="150.0" />
+      <Button layoutX="132.0" layoutY="351.0" mnemonicParsing="false" text="Registrar" />
+      <Button layoutX="398.0" layoutY="351.0" mnemonicParsing="false" text="Cancelar" />
+      <ComboBox layoutX="301.0" layoutY="209.0" prefWidth="150.0" />
+      <Label layoutX="112.0" layoutY="213.0" text="Nota:" />
    </children>
 </AnchorPane>

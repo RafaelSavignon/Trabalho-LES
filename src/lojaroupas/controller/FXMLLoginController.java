@@ -33,6 +33,9 @@ import java.sql.SQLException;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
+import lojaroupas.database.Database;
+import lojaroupas.database.DatabaseFactory;
+import lojaroupas.model.Funcionario;
 
 
 public class FXMLLoginController implements Initializable {
@@ -45,6 +48,8 @@ public class FXMLLoginController implements Initializable {
 
     @FXML
     private PasswordField TextFieldSenha;
+    private final Database database = DatabaseFactory.getDatabase("postgresql");
+    private final Connection connection = database.conectar();
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -59,8 +64,52 @@ public class FXMLLoginController implements Initializable {
     
     
     @FXML
-    void handleLogin(ActionEvent event) {
+    void handleLogin(ActionEvent event) throws IOException {
+        Funcionario func = new Funcionario();
 
+
+        if(TextFieldLogin.getText().length() != 0 && TextFieldSenha.getText().length() != 0){
+            func.setNome(TextFieldLogin.getText());
+            func.setCpf(TextFieldSenha.getText());
+            func.setGerente(pegarGerente(func.getCpf()));
+
+            Parent root = FXMLLoader.load(getClass().getResource("/lojaroupas/view/FXMLPrincipal.fxml"));
+
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+
+            stage.setScene(scene);
+            stage.setTitle("Sistema de Gestão de Estoque");
+            stage.setResizable(false);
+            stage.show();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro!");
+            alert.setHeaderText("Ocorreu um erro!");
+            alert.setContentText("Preencha os campos de login!");
+            alert.show();
+        }
+
+    }
+
+    private boolean pegarGerente(String cpf) {
+        boolean gerente = false;
+        String sql = "SELECT eGerente FROM funcionario WHERE cpfFuncionario = '" + cpf + "'";
+        try {
+            PreparedStatement stmt_uf = connection.prepareStatement(sql);
+            ResultSet resultado = stmt_uf.executeQuery();
+            while(resultado.next()) {
+                gerente = resultado.getBoolean("eGerente");
+            }
+            
+        } catch (SQLException ex) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro!");
+            alert.setHeaderText("Ocorreu um erro!");
+            alert.setContentText(ex.toString());
+            alert.show();
+        }
+        return gerente;
     }
     
 }
