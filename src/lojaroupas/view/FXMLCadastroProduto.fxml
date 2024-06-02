@@ -56,19 +56,19 @@
                         <TextField fx:id="textFieldProdutoDescricao" GridPane.columnIndex="1" />
                         <Group GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <children>
-                              <ComboBox fx:id="comboBoxProdutoTipo" layoutX="106.0" layoutY="296.0" prefHeight="25.0" prefWidth="160.0" />
+                              <ComboBox fx:id="comboBoxProdutoTipo" layoutX="106.0" layoutY="296.0" onMouseClicked="#carregarComboBoxTipo" prefHeight="25.0" prefWidth="160.0" />
                               <Button fx:id="buttonAdicionarTipo" layoutX="266.0" layoutY="296.0" mnemonicParsing="false" onAction="#handleButtonAdicionarTipo" text="+" />
                            </children>
                         </Group>
                         <Group GridPane.columnIndex="1" GridPane.rowIndex="2">
                            <children>
-                              <ComboBox fx:id="comboBoxProdutoMarca" layoutX="106.0" layoutY="296.0" prefHeight="25.0" prefWidth="160.0" />
+                              <ComboBox fx:id="comboBoxProdutoMarca" layoutX="106.0" layoutY="296.0" onMouseClicked="#carregarComboBoxMarca" prefHeight="25.0" prefWidth="160.0" />
                               <Button fx:id="buttonAdicionarMarca" layoutX="266.0" layoutY="296.0" mnemonicParsing="false" onAction="#handleButtonAdicionarMarca" text="+" />
                            </children>
                         </Group>
                         <Group GridPane.columnIndex="1" GridPane.rowIndex="3">
                            <children>
-                              <ComboBox fx:id="comboBoxProdutoTecido" layoutX="106.0" layoutY="296.0" prefHeight="25.0" prefWidth="160.0" />
+                              <ComboBox fx:id="comboBoxProdutoTecido" layoutX="106.0" layoutY="296.0" onMouseClicked="#carregarComboBoxTecido" prefHeight="25.0" prefWidth="160.0" />
                               <Button fx:id="buttonAdicionarTecido" layoutX="266.0" layoutY="296.0" mnemonicParsing="false" onAction="#handleButtonAdicionarTecido" text="+" />
                            </children>
                         </Group>

@@ -124,7 +124,7 @@ public class FXMLCadastroClienteController implements Initializable {
         CidadeDAO cidadeDAO = new CidadeDAO();
         cidadeDAO.setConnection(connection);
         
-        if(comboBoxClienteUf.getValue() == null) {
+        if(comboBoxClienteUf.getValue() == null || "".equals(comboBoxClienteUf.getValue())) {
             listCidade = cidadeDAO.listar();
             observableListCidade = FXCollections.observableArrayList(listCidade);
             comboBoxClienteCidade.getItems().clear();

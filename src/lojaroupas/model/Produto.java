@@ -10,9 +10,9 @@ import java.time.LocalDate;
 public class Produto {
     
     private int id;
+    private int tipo;
     private int marca;
     private int tecido;
-    private int tipo;
     private String descricao;
     private int quantidade;
     private float valor;

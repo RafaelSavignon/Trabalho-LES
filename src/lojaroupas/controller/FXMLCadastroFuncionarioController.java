@@ -78,6 +78,8 @@ public class FXMLCadastroFuncionarioController implements Initializable {
     
     private List<String> listCidade;
     private ObservableList<String> observableListCidade;
+    
+    private String vazio = new String();
 
     //Atributos para manipulação de Banco de Dados
     private final Database database = DatabaseFactory.getDatabase("postgresql");
@@ -147,7 +149,10 @@ public class FXMLCadastroFuncionarioController implements Initializable {
         if (funcionario != null) {
             textFieldFuncionarioNome.setText(funcionario.getNome());
             textFieldFuncionarioCpf.setText(funcionario.getCpf());
+            if(funcionario.getSalario() != 0) {
+                
             textFieldFuncionarioSalario.setText(String.valueOf(funcionario.getSalario()));
+            }
             comboBoxFuncionarioUf.setValue(pegarNomeUf(funcionario.getCidade()));
             comboBoxFuncionarioCidade.setValue(pegarNomeCidade(funcionario.getCidade()));
             checkBoxFuncionarioGerente.setSelected(funcionario.isGerente());
@@ -187,9 +192,9 @@ public class FXMLCadastroFuncionarioController implements Initializable {
                 
                 resultado.setNome(textFieldFuncionarioNome.getText());
                 resultado.setCpf(textFieldFuncionarioCpf.getText());
-                funcionario.setSalario(Float.parseFloat(textFieldFuncionarioSalario.getText()));
-                funcionario.setCidade(pegarIdCidade(comboBoxFuncionarioCidade.getValue()));
-                funcionario.setGerente(checkBoxFuncionarioGerente.isSelected());
+                resultado.setSalario(Float.parseFloat(textFieldFuncionarioSalario.getText()));
+                resultado.setCidade(pegarIdCidade(comboBoxFuncionarioCidade.getValue()));
+                resultado.setGerente(checkBoxFuncionarioGerente.isSelected());
                 
                 funcionarioDAO.alterar(resultado);
                 
