@@ -129,7 +129,7 @@ public class FXMLCadastroFuncionarioController implements Initializable {
         CidadeDAO cidadeDAO = new CidadeDAO();
         cidadeDAO.setConnection(connection);
         
-        if(comboBoxFuncionarioUf.getValue() == null) {
+        if(comboBoxFuncionarioUf.getValue() == null || "".equals(comboBoxFuncionarioUf.getValue())) {
             listCidade = cidadeDAO.listar();
             observableListCidade = FXCollections.observableArrayList(listCidade);
             comboBoxFuncionarioCidade.getItems().clear();
@@ -150,8 +150,7 @@ public class FXMLCadastroFuncionarioController implements Initializable {
             textFieldFuncionarioNome.setText(funcionario.getNome());
             textFieldFuncionarioCpf.setText(funcionario.getCpf());
             if(funcionario.getSalario() != 0) {
-                
-            textFieldFuncionarioSalario.setText(String.valueOf(funcionario.getSalario()));
+                textFieldFuncionarioSalario.setText(String.valueOf(funcionario.getSalario()));
             }
             comboBoxFuncionarioUf.setValue(pegarNomeUf(funcionario.getCidade()));
             comboBoxFuncionarioCidade.setValue(pegarNomeCidade(funcionario.getCidade()));

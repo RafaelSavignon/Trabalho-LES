@@ -36,10 +36,7 @@ import lojaroupas.dao.TecidoDAO;
 import lojaroupas.dao.ProdutoDAO;
 import lojaroupas.database.Database;
 import lojaroupas.database.DatabaseFactory;
-import lojaroupas.model.Marca;
 import lojaroupas.model.Produto;
-import lojaroupas.model.Tecido;
-import lojaroupas.model.Tipo;
 
 /**
  * FXML Controller class
@@ -206,12 +203,12 @@ public class FXMLCadastroProdutoController implements Initializable {
 
                 resultado = produtoDAO.buscar(produto);
                 
-                produto.setTipo(pegarIdTipo(comboBoxProdutoTipo.getValue()));
-                produto.setMarca(pegarIdMarca(comboBoxProdutoMarca.getValue()));
-                produto.setTecido(pegarIdTecido(comboBoxProdutoTecido.getValue()));
-                produto.setDescricao(textFieldProdutoDescricao.getText());
-                produto.setQuantidade(0);
-                produto.setValor(Float.parseFloat(textFieldProdutoValor.getText()));
+                resultado.setTipo(pegarIdTipo(comboBoxProdutoTipo.getValue()));
+                resultado.setMarca(pegarIdMarca(comboBoxProdutoMarca.getValue()));
+                resultado.setTecido(pegarIdTecido(comboBoxProdutoTecido.getValue()));
+                resultado.setDescricao(textFieldProdutoDescricao.getText());
+                resultado.setQuantidade(0);
+                resultado.setValor(Float.parseFloat(textFieldProdutoValor.getText()));
                 
                 produtoDAO.alterar(resultado);
                 

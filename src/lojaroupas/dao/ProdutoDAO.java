@@ -78,7 +78,7 @@ public class ProdutoDAO {
     }
     
     public void alterar(Produto produto) {
-        String sql = "UPDATE produto SET tipoProduto = ?, marcaProduto = ?, tecidoProduto = ?, descricaoProduto = ?, valorProduto = ? WHERE idProduto = ?";
+        String sql = "UPDATE produto SET tipoProduto = ?, marcaProduto = ?, tecidoProduto = ?, descricaoProduto = ?, valorProduto = ? WHERE descricaoProduto = ?";
 
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
@@ -88,7 +88,7 @@ public class ProdutoDAO {
             stmt.setInt(3, produto.getTecido());
             stmt.setString(4, produto.getDescricao());
             stmt.setFloat(5, produto.getValor());
-            stmt.setInt(6, produto.getId());
+            stmt.setString(6, produto.getDescricao());
             stmt.execute();
 
 
@@ -98,10 +98,10 @@ public class ProdutoDAO {
     }
 
     public boolean remover(Produto produto) {
-        String sql = "DELETE FROM produto WHERE idProduto=?";
+        String sql = "DELETE FROM produto WHERE descricaoProduto=?";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
-            stmt.setInt(1, produto.getId());
+            stmt.setString(1, produto.getDescricao());
             stmt.execute();
             return true;
         } catch (SQLException ex) {
@@ -115,7 +115,7 @@ public class ProdutoDAO {
         Produto retorno = new Produto();
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
-            stmt.setInt(1, produto.getId());
+            stmt.setString(1, produto.getDescricao());
             ResultSet resultado = stmt.executeQuery();
             if (resultado.next()) {
                 produto.setTipo(resultado.getInt("tipoProduto"));

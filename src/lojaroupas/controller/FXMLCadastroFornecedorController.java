@@ -122,7 +122,7 @@ public class FXMLCadastroFornecedorController implements Initializable {
         CidadeDAO cidadeDAO = new CidadeDAO();
         cidadeDAO.setConnection(connection);
         
-        if(comboBoxFornecedorUf.getValue() == null) {
+        if(comboBoxFornecedorUf.getValue() == null || "".equals(comboBoxFornecedorUf.getValue())) {
             listCidade = cidadeDAO.listar();
             observableListCidade = FXCollections.observableArrayList(listCidade);
             comboBoxFornecedorCidade.getItems().clear();
