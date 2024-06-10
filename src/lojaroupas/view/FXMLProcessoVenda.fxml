@@ -5,14 +5,15 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label layoutX="131.0" layoutY="66.0" text="Funcionário:" />
-      <ComboBox layoutX="320.0" layoutY="62.0" prefWidth="150.0" />
-      <Label layoutX="156.0" layoutY="98.0" text="Cliente:" />
-      <ComboBox layoutX="320.0" layoutY="94.0" prefWidth="150.0" />
+      <Label layoutX="125.0" layoutY="37.0" text="Funcionário:" />
+      <ComboBox layoutX="333.0" layoutY="33.0" prefWidth="150.0" />
+      <Label layoutX="125.0" layoutY="69.0" text="Cliente:" />
+      <ComboBox layoutX="333.0" layoutY="65.0" prefWidth="150.0" />
       <Button layoutX="132.0" layoutY="351.0" mnemonicParsing="false" text="Registrar" />
       <Button layoutX="398.0" layoutY="351.0" mnemonicParsing="false" text="Cancelar" />
       <TableView layoutX="102.0" layoutY="132.0" prefHeight="207.0" prefWidth="396.0">
@@ -22,5 +23,10 @@
             <TableColumn prefWidth="142.0" text="Valor" />
         </columns>
       </TableView>
+      <Label layoutX="125.0" layoutY="103.0" text="Produto:" />
+      <ComboBox layoutX="190.0" layoutY="99.0" prefHeight="25.0" prefWidth="118.0" />
+      <Label layoutX="325.0" layoutY="103.0" text="Qtde:" />
+      <TextField layoutX="362.0" layoutY="99.0" prefHeight="25.0" prefWidth="30.0" />
+      <Button layoutX="416.0" layoutY="99.0" mnemonicParsing="false" text="Adicionar" />
    </children>
 </AnchorPane>
